@@ -25,6 +25,8 @@ namespace LibraryManagementSystem.Services
         // getting books in alphabetical order
         public async Task<IEnumerable<Book>> GetBooksAlphabeticallyAsync() => await _bookRepository.GetBooksAlphabeticallyAsync();
 
+        public async Task<IEnumerable<Book>> GetBookCopies(int copies) => await _bookRepository.GetBooksByCopiesAsync(copies);
+
 
 
 

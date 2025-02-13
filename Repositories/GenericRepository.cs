@@ -31,7 +31,6 @@ namespace Library_Management_System.Repositories
 
             await _context.SaveChangesAsync();
 
-            //Console.WriteLine($"{entity}added successfully!");
         }
 
         // Updating entities
@@ -41,7 +40,6 @@ namespace Library_Management_System.Repositories
 
             await _context.SaveChangesAsync();
 
-            //Console.WriteLine($"{entity}updated successfully!");
         }
 
         // Deleting entities
@@ -51,7 +49,6 @@ namespace Library_Management_System.Repositories
 
             await _context.SaveChangesAsync();
 
-           // Console.WriteLine($"{entity}deleteed successfully!");
         }
     }
 

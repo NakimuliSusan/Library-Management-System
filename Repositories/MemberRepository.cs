@@ -19,10 +19,30 @@ namespace Library_Management_System.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Member>> GetRecentMembersAsync(int months)
+        public async Task<IEnumerable<Member>> GetRecentMembers(int months)
         {
-            DateTime fromDate = DateTime.Now.AddMonths(-months);
+            DateTime fromDate = DateTime.UtcNow.AddMonths(-months);
             return await _context.Members.Where(m => m.dateJoined >= fromDate).ToListAsync();
         }
+
+        // Filter members based on any member property
+        public async Task<IEnumerable<Member>> SearchMembers(string? name = null, string? gender = null, DateTime? dateJoined = null)
+        {
+
+            //dynamic filtering.
+            var query = _context.Members.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(m => m.Name.Contains(name));
+
+            if (!string.IsNullOrWhiteSpace(gender))
+                query = query.Where(m => m.Gender == gender); 
+
+            if (dateJoined.HasValue)
+                query = query.Where(m => m.dateJoined.Date == dateJoined.Value.Date); 
+
+            return await query.ToListAsync();
+        }
+
     }
 }
